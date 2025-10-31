@@ -1,10 +1,9 @@
 package com.pmm.a22;
 
-import static com.pmm.a22.R.*;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     private String resultado= "";
     private boolean calculado= false;
 
+    TextView pantalla;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +33,16 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        pantalla=findViewById(R.id.pantalla);
 
     }
 
 
     public void operandClick(View view) {
+        /**
+         * Para los operandos he intentado hacerlo con un switch para mayor comodidad
+         * pero no me dejaba poner los id's y lo he tenido que hacer con bucles if
+         */
 
         if (calculado) clearClick(null);
 
@@ -44,6 +50,20 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(operandButtonId);
         String operand="";
 
+        if (operandButtonId==R.id.b0){operand="0";}
+        else if (operandButtonId==R.id.b1){operand="1";}
+        else if (operandButtonId==R.id.b2){operand="2";}
+        else if (operandButtonId==R.id.b3){operand="3";}
+        else if (operandButtonId==R.id.b4){operand="4";}
+        else if (operandButtonId==R.id.b5){operand="5";}
+        else if (operandButtonId==R.id.b6){operand="6";}
+        else if (operandButtonId==R.id.b7){operand="7";}
+        else if (operandButtonId==R.id.b8){operand="8";}
+        else if (operandButtonId==R.id.b9){operand="9";}
+        else if (operandButtonId==R.id.bSum){operand="+";}
+        else if (operandButtonId==R.id.bRes){operand="-";}
+        else if (operandButtonId==R.id.bMul){operand="X";}
+        else if (operandButtonId==R.id.bDiv){operand="/";}
 
         // COMPLETAR COMO PARTE DEL EJERCICIO SELECCIONANDO EL OPERANDO
 
@@ -53,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         // COMPLETAR COMO PARTE DEL EJERCICIO ACTUALIZANDO LA PANTALLA DE LA CALCULADORA
 
+        pantalla.setText(resultado);
     }
 
     public void operatorClick(View view) {
@@ -62,11 +83,15 @@ public class MainActivity extends AppCompatActivity {
         Calculator.Operators operator= null;
 
         if (!_calculator.isNewOperation()) {
-
+            if (operatorButtonId==R.id.bSum){
+                operator=Calculator.Operators.ADD;
+            }
             // COMPLETAR COMO PARTE DEL EJERCICIO EJECUTANDO EL CÁLCULO
 
             return;
         }
+
+
 
         // COMPLETAR COMO PARTE DEL EJERCICIO SELECCIONANDO EL OPERADOR
 
@@ -74,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
         resultado+= operator;
 
         // COMPLETAR COMO PARTE DEL EJERCICIO ACTUALIZANDO LA PANTALLA DE LA CALCULADORA
+
+        pantalla.setText(resultado);
 
     }
 
@@ -84,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
         resultado= "";
 
         // COMPLETAR COMO PARTE DEL EJERCICIO ACTUALIZANDO LA PANTALLA DE LA CALCULADORA
+
+        pantalla.setText(resultado);
     }
 
 }
